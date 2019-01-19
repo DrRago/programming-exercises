@@ -25,17 +25,17 @@ public class Round {
     }
 
     private static int retardedRound(char[] chars, int state) {
-        int n=chars.length-1;
+        int n = chars.length - 1;
 
-        char[] temp=new char[n];
-        System.arraycopy(chars,1,temp,0,n);
+        char[] temp = new char[n];
+        System.arraycopy(chars, 1, temp, 0, n);
         char currentChar = chars[0];
 
         if (currentChar == 46 && state == NOTFOUND) {
             return retardedRound(temp, FOUND);
         } else if (state == FOUND && Character.getNumericValue(currentChar) >= 5) {
             return Round.chars[0] == 45 ? -1 : 1;
-        } else if (state == FOUND  && Character.getNumericValue(currentChar) < 5) {
+        } else if (state == FOUND && Character.getNumericValue(currentChar) < 5) {
             return 0;
         }
         return retardedRound(temp, NOTFOUND);
