@@ -11,6 +11,7 @@ import java.util.Scanner;
  */
 public class Easter {
     public static void main(String[] args) throws ParseException {
+
         while (true) {
             System.out.print("Enter year: ");
             long year;
@@ -34,7 +35,7 @@ public class Easter {
 
             Date date1 = myFormat.parse(inputString1);
             date1.setDate(offset);
-            System.out.println(String.format("%02d/%02d/%04d", date1.getDate(), date1.getMonth(), year));
+            System.out.println(String.format("%02d/%02d/%04d", date1.getDate(), date1.getMonth() + 1, year));
         }
     }
 
