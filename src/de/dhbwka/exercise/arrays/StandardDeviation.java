@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class StandardDeviation {
     public static void main(String[] args) {
-        int[] numbers = getRandArray(100);
+        int[] numbers = ThreadLocalRandom.current().ints(100).toArray();
         System.out.println("Mean: " + getMean(numbers));
         System.out.println("Standard deviation: " + Math.sqrt(getVariance(numbers)));
     }
@@ -27,14 +27,5 @@ public class StandardDeviation {
             sum += number;
         }
         return sum / numbers.length;
-    }
-
-    private static int[] getRandArray(int n) {
-        int[] array = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            array[i] = ThreadLocalRandom.current().nextInt(0, 11);
-        }
-        return array;
     }
 }

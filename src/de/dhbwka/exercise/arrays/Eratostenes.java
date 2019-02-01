@@ -19,7 +19,7 @@ public class Eratostenes {
             primes.add(curr);
             sieve.removeIf(element -> element % curr == 0);
         }
-        System.out.printf("%ds", System.currentTimeMillis() - start);
+        System.out.printf("%ds%n", System.currentTimeMillis() - start);
 
         System.out.println(primes);
 
