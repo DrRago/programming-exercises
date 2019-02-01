@@ -8,6 +8,20 @@ import java.util.Scanner;
  * @author Leonhard Gahr
  */
 public class ScannerUtility {
+    public static int[] getIntArray(String message) {
+        final int N = getInt("Please enter the number n of elements: ");
+        return getIntArray(message, N);
+    }
+
+    public static int[] getIntArray(String message, int N) {
+        int[] values = new int[N];
+        for (int i = 0; i < N; i++) {
+            values[i] = getInt(String.format(message, i));
+        }
+
+        return values;
+    }
+
     public static long getLong(String message) {
         return getLong(message, new long[0]);
     }

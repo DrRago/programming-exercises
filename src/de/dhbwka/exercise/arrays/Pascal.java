@@ -13,7 +13,7 @@ public class Pascal {
         final String FORMAT = "%" + MAX_LENGTH + "d";
 
         for (int n = 0; n < depth; n++) {
-            System.out.print(new String(new char[(depth - (n + 1)) * MAX_LENGTH / 2]).replaceAll("\00", " "));
+            System.out.print(" ".repeat((depth - (n + 1)) * MAX_LENGTH/2));
             for (int k = 0; k < n + 1; k++) {
                 System.out.printf(FORMAT, binomialCoefficient(n, k));
             }

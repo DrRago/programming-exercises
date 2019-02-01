@@ -13,7 +13,7 @@ public class Fibonacci {
     }
 
     private static int[] getFibonacci() {
-        return getFibonacci(new int[] {0, 1}, 50);
+        return getFibonacci(new int[] {0, 1}, 20);
     }
 
     private static int[] getFibonacci(int[] nums, final int LIMIT) {
