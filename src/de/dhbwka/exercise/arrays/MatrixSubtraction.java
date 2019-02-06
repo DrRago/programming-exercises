@@ -57,7 +57,7 @@ public class MatrixSubtraction {
         int[][] matrix = new int[n][m];
 
         for (int row = 0; row < n; row++) {
-            matrix[row] = random.ints(m).toArray();
+            matrix[row] = random.ints(m, 0, 101).toArray();
         }
         return matrix;
     }

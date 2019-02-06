@@ -1,5 +1,7 @@
 package de.dhbwka.exercise.arrays;
 
+import java.util.Arrays;
+
 import static de.dhbwka.exercise.utility.ScannerUtility.getInt;
 import static de.dhbwka.exercise.utility.ScannerUtility.getIntArray;
 
@@ -10,11 +12,8 @@ public class BubbleSort {
     public static void main(String[] args) {
         final int N = getInt("Please enter the number n of elements: ");
 
-        int[] values = getIntArray("Enter value %d: ", N);
-
-        for (int i : bubbleSort(values, N)) {
-            System.out.print(i + " ");
-        }
+        int[] values = bubbleSort(getIntArray("Enter value %d: ", N), N);
+        System.out.println(Arrays.toString(values));
     }
 
     private static int[] bubbleSort(int[] values, int n) {
