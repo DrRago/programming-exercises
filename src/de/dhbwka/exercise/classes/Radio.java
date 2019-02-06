@@ -10,8 +10,8 @@ import lombok.Setter;
  */
 public class Radio {
     @Getter
-   // whether radio is on
-   private boolean on;
+    // whether radio is on
+    private boolean on;
 
     @Getter
     @Setter
@@ -22,11 +22,24 @@ public class Radio {
     // frequency (85.0 - 110.0)
     private double frequency;
 
+    /**
+     * Instantiates a new Radio with default values
+     *
+     * @throws IllegalArgumentException the illegal argument exception
+     */
     Radio() throws IllegalArgumentException {
         // initialize radio with default vars
         this(true, 5, 85.0);
     }
 
+    /**
+     * Instantiates a new Radio.
+     *
+     * @param on        the on
+     * @param volume    the volume
+     * @param frequency the frequency
+     * @throws IllegalArgumentException the illegal argument exception
+     */
     Radio(boolean on, int volume, double frequency) throws IllegalArgumentException {
         // check whether arguments are valid
         if (0 > volume || 10 < volume) {
@@ -42,6 +55,9 @@ public class Radio {
         this.frequency = frequency;
     }
 
+    /**
+     * Increase volume.
+     */
     void incVolume() {
         // do nothing if the radio is off
         if (!this.isOn()) {
@@ -56,6 +72,9 @@ public class Radio {
         this.setVolume(this.getVolume() + 1);
     }
 
+    /**
+     * Decrease volume.
+     */
     void decVolume() {
         // do nothing if the radio is off
         if (!this.isOn()) {
@@ -70,14 +89,25 @@ public class Radio {
         this.setVolume(this.getVolume() - 1);
     }
 
+    /**
+     * Turn on.
+     */
     void turnOn() {
         this.on = true;
     }
 
+    /**
+     * Turn off.
+     */
     void turnOff() {
         this.on = false;
     }
 
+    /**
+     * Sets frequency (min 85, max 110, default 99)
+     *
+     * @param frequency the frequency
+     */
     void setFrequency(double frequency) {
         // set frequency to default if it is out of range
         if (frequency < 85.0 || frequency > 110.0) {
@@ -90,5 +120,27 @@ public class Radio {
     @Override
     public String toString() {
         return String.format("Radio %s; Volume %d; Frequency %.2f Mhz", this.isOn() ? "on" : "off", this.getVolume(), this.getFrequency());
+    }
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
+        Radio radio = new Radio();
+        System.out.println(radio);
+        radio.incVolume();
+        System.out.println(radio);
+        radio.decVolume();
+        radio.setFrequency(200);
+        System.out.println(radio);
+        radio.turnOff();
+        radio.decVolume();
+        System.out.println(radio);
+        radio.incVolume();
+        System.out.println(radio);
+        radio.turnOn();
+        System.out.println(radio);
     }
 }
