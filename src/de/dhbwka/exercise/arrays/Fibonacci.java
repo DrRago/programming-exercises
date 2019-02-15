@@ -1,5 +1,7 @@
 package de.dhbwka.exercise.arrays;
 
+import de.dhbwka.exercise.utility.ScannerUtility;
+
 import java.util.Arrays;
 
 /**
@@ -7,28 +9,22 @@ import java.util.Arrays;
  */
 public class Fibonacci {
     public static void main(String[] args) {
-        for (int num : getFibonacci()) {
-            System.out.println(num);
-        }
+        Arrays.stream(getFibonacci()).forEach(System.out::println);
     }
 
     private static int[] getFibonacci() {
-        return getFibonacci(new int[] {0, 1}, 20);
+        return getFibonacci(new int[]{1, 1}, ScannerUtility.getInt("Please enter depth: "));
     }
 
     private static int[] getFibonacci(int[] nums, final int LIMIT) {
-        final int N = nums.length;
-        if (N >= LIMIT) {
-            return nums;
-        }
-        int[] newNums = append(nums, nums[N - 2] + nums[N - 1]);
+        if (nums.length >= LIMIT) return nums;
+        int[] newNums = append(nums, nums[nums.length - 2] + nums[nums.length - 1]);
         return getFibonacci(newNums, LIMIT);
     }
 
     private static int[] append(int[] arr, int element) {
-        final int N = arr.length;
-        arr = Arrays.copyOf(arr, N + 1);
-        arr[N] = element;
-        return arr;
+        int[] arr2 = Arrays.copyOf(arr, arr.length + 1);
+        arr2[arr.length] = element;
+        return arr2;
     }
 }

@@ -1,5 +1,6 @@
 package de.dhbwka.exercise.utility;
 
+import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,9 +23,35 @@ public class ScannerUtility {
         return values;
     }
 
+    public static String getString(String message, char[] allowed, int len) {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print(message);
+
+            String result = scanner.nextLine();
+            if (result.chars().allMatch(c -> new String(allowed).indexOf(c) != -1)) {
+                if (result.length() != len) {
+                    System.out.printf("Illegal input. Must be exactly %d characters.%n", len);
+                    continue;
+                }
+                return result;
+            } else {
+                System.out.printf("Illegal input. Mut be one of (%s)%n", String.join(", ", CharBuffer.wrap(allowed).chars().mapToObj(intValue -> String.valueOf((char) intValue)).toArray(String[]::new)));
+            }
+        }
+    }
+
+    public static String getString(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(message);
+
+        return scanner.nextLine();
+    }
+
     public static long getLong(String message) {
         return getLong(message, new long[0]);
     }
+
     public static long getLong(String message, long[] limits) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
