@@ -4,10 +4,7 @@ image: java:latest
 
 pages:
   stage: deploy
-  script:
-  - ls /usr/lib/jvm
-  - mkdir .public
-  - /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc -sourcepath src -d public -subpackages .
+  script: /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc -sourcepath src -d public -subpackages . -private
   artifacts:
     paths:
     - public
