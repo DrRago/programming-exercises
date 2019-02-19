@@ -3,6 +3,8 @@
 pages:
   stage: deploy
   script:
+  - ls
+  - docker pull openjdk
   - mkdir .public
   - cp -r * .public
   - mv .public public
