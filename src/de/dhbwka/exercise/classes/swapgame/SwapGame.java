@@ -1,19 +1,22 @@
-package de.dhbwka.exercise.classes;
+package de.dhbwka.exercise.classes.swapgame;
 
 import de.dhbwka.exercise.utility.ScannerUtility;
 
 /**
+ * Controller for the swapgame field
+ *
  * @author Leonhard Gahr
  */
 public class SwapGame {
 
-
     public static void main(String[] args) {
         Field field = new Field(10, 10, 7);
+        mainLoop(field);
+    }
+
+    private static void mainLoop(Field field) {
         System.out.println(field);
-
         while (true) {
-
             int[] coords1 = getInput("Enter point 1: ");
             int[] coords2 = getInput("Enter point 2: ");
 
