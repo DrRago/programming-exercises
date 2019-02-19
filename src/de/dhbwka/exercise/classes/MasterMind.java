@@ -21,7 +21,7 @@ public class MasterMind {
         char[] allowed = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         int n = 0;
         String input;
-        while (n < tries && !(input = ScannerUtility.getString("Enter hier: ", allowed, 5)).equals(toGuess)) {
+        while (n < tries && !(input = ScannerUtility.getString("Enter guess: ", allowed, 5)).equals(toGuess)) {
             hints.append(input).append(" ").append(String.join(" ", getHint(toGuess, input))).append("\n");
             System.out.println(hints);
             n++;

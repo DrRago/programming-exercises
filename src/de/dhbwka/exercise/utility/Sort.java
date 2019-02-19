@@ -1,5 +1,8 @@
 package de.dhbwka.exercise.utility;
 
+import java.math.BigInteger;
+import java.util.Arrays;
+
 /**
  * @author Leonhard Gahr
  */
@@ -37,7 +40,7 @@ public class Sort {
 
     private static boolean isSorted(int[] arr) {
         for (int x = 0; x < arr.length - 1; ++x) {
-            if (arr[x] >= arr[x + 1]) {
+            if (arr[x] > arr[x + 1]) {
                 return false;
             }
         }
@@ -77,6 +80,14 @@ public class Sort {
         }
     }
 
+    public static void bogoSort(int[] arr, BigInteger counter) {
+        while (!isSorted(arr)) {
+            counter = counter.add(BigInteger.ONE);
+            shuffle(arr);
+        }
+        System.out.print(counter);
+    }
+
     public static <T extends Comparable<T>> void quickSort(T[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
@@ -89,5 +100,12 @@ public class Sort {
             quickSort(arr, begin, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, end);
         }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{213, 213, 21, 2, 5235, 46, 54, 634, 6, 32, 623, 523, 325, 18};
+        System.out.printf("I've sorted %s with only ", Arrays.toString(arr));
+        bogoSort(arr, BigInteger.ZERO);
+        System.out.println(" iterations!");
     }
 }

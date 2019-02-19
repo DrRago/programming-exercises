@@ -35,10 +35,10 @@ public class Radio {
     /**
      * Instantiates a new Radio.
      *
-     * @param on        the on
-     * @param volume    the volume
-     * @param frequency the frequency
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param on        whether the radio is on
+     * @param volume    the initial volume
+     * @param frequency the initial frequency
+     * @throws IllegalArgumentException thrown if the volume or the frequency value is illegal
      */
     Radio(boolean on, int volume, double frequency) throws IllegalArgumentException {
         // check whether arguments are valid
@@ -106,7 +106,7 @@ public class Radio {
     /**
      * Sets frequency (min 85, max 110, default 99)
      *
-     * @param frequency the frequency
+     * @param frequency the frequency to set
      */
     void setFrequency(double frequency) {
         // set frequency to default if it is out of range

@@ -28,7 +28,7 @@ public class ScannerUtility {
             Scanner scanner = new Scanner(System.in);
             System.out.print(message);
 
-            String result = scanner.nextLine();
+            String result = scanner.nextLine().toLowerCase();
             if (result.chars().allMatch(c -> new String(allowed).indexOf(c) != -1)) {
                 if (result.length() != len) {
                     System.out.printf("Illegal input. Must be exactly %d characters.%n", len);
