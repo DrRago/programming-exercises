@@ -7,8 +7,7 @@ pages:
   script:
   - ls /usr/lib/jvm
   - mkdir .public
-  - /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc -sourcepath src/ -d .public/
-  - mv .public public
+  - /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc -sourcepath src -d public -subpackages .
   artifacts:
     paths:
     - public
