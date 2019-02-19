@@ -1,13 +1,13 @@
 # This file is a template, and might need editing before it works on your project.
 # Full project: https://gitlab.com/pages/plain-html
-image: java:1.11
+image: java:latest
 
 pages:
   stage: deploy
   script:
   - ls /usr/lib/jvm
   - mkdir .public
-  - cp -r * .public
+  - /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc -sourcepath src/ -d .public/
   - mv .public public
   artifacts:
     paths:
