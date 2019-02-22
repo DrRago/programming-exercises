@@ -1,98 +1,146 @@
 package de.dhbwka.exercise.utility;
 
-import java.math.BigInteger;
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static de.dhbwka.exercise.utility.SortUtility.*;
+
 
 /**
+ * Multiple sort algorithm implementations
+ *
  * @author Leonhard Gahr
  */
-
-
 public class Sort {
-    private static <T> void shuffle(T[] arr) {
-        for (int x = 0; x < arr.length; ++x) {
-            int index1 = (int) (Math.random() * arr.length),
-                    index2 = (int) (Math.random() * arr.length);
-            T temp = arr[index1];
-            arr[index1] = arr[index2];
-            arr[index2] = temp;
-        }
-    }
 
-    private static void shuffle(int[] arr) {
-        for (int x = 0; x < arr.length; ++x) {
-            int index1 = (int) (Math.random() * arr.length),
-                    index2 = (int) (Math.random() * arr.length);
-            int temp = arr[index1];
-            arr[index1] = arr[index2];
-            arr[index2] = temp;
-        }
-    }
+    /**
+     * Perform the bogosort for generic array with statistical outputs
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void bogoSortStats(T[] arr) {
+        System.out.printf("Average case %s%n", NumberFormat.getInstance().format(faculty(arr.length)));
 
-    private static <T extends Comparable<T>> boolean isSorted(T[] i) {
-        for (int x = 0; x < i.length - 1; ++x) {
-            if (i[x].compareTo(i[x + 1]) > 0) {
-                return false;
+        BigDecimal coun = BigDecimal.ZERO;
+        long startTime = System.currentTimeMillis();
+
+        while (!isSorted(arr)) {
+            coun = coun.add(BigDecimal.ONE);
+            if (coun.remainder(new BigDecimal(100000)).compareTo(BigDecimal.ZERO) == 0) {
+                System.out.print("\r" + NumberFormat.getInstance().format(coun));
             }
+            shuffle(arr);
         }
-        return true;
+        System.out.printf("Sorted %d elements in %s iterations and %s seconds%n", arr.length, NumberFormat.getInstance().format(coun), (System.currentTimeMillis() - startTime) / 1000);
+        System.out.printf("Saved %s iterations%n", NumberFormat.getInstance().format(faculty(arr.length).subtract(coun)));
     }
 
-    private static boolean isSorted(int[] arr) {
-        for (int x = 0; x < arr.length - 1; ++x) {
-            if (arr[x] > arr[x + 1]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static <T extends Comparable<T>> int partition(T[] arr, int begin, int end) {
-        T pivot = arr[end];
-        int i = (begin - 1);
-
-        for (int j = begin; j < end; j++) {
-            if (arr[j].compareTo(pivot) <= 0) {
-                i++;
-
-                T swapTemp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = swapTemp;
-            }
-        }
-
-        T swapTemp = arr[i + 1];
-        arr[i + 1] = arr[end];
-        arr[end] = swapTemp;
-
-        return i + 1;
-    }
-
+    /**
+     * perform the bogosort on a generic array
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
     public static <T extends Comparable<T>> void bogoSort(T[] arr) {
         while (!isSorted(arr)) {
             shuffle(arr);
         }
     }
 
+    /**
+     * perform the bogosort on a int array
+     *
+     * @param arr the int array
+     */
     public static void bogoSort(int[] arr) {
         while (!isSorted(arr)) {
             shuffle(arr);
         }
     }
 
-    public static void bogoSort(int[] arr, BigInteger counter) {
+    /**
+     * perform the bozosort on a generic array
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void bozoSort(T[] arr) {
         while (!isSorted(arr)) {
-            counter = counter.add(BigInteger.ONE);
-            shuffle(arr);
+            swap(arr, randIndex(arr.length), randIndex(arr.length));
         }
-        System.out.print(counter);
     }
 
+    /**
+     * perform the recursive bogobogosort on a generic array
+     *
+     * @param <T> the generic type
+     * @param arr the array
+     */
+    public static <T extends Comparable<T>> void bogoBogoSort(T[] arr) {
+        while (true) {
+            if (bogoBogoSortRecursive(arr)) {
+                break;
+            }
+        }
+
+    }
+
+    /**
+     * The solar bitflip sort for generic arrays
+     * <p>
+     * check if the array is sorted, if not, wait a random amount of time, pray for having bit flips caused
+     * by solar radiation, just in the correct order and repeat the check
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void solarBitflipSort(T[] arr) {
+        while (!isSorted(arr)) {
+            try {
+                Thread.sleep(ThreadLocalRandom.current().nextInt(0, 3000));
+            } catch (InterruptedException ignored) {
+            }
+        }
+    }
+
+    /**
+     * Dictator sort for generic types
+     * <p>
+     * check if the array is sorted, the dictator out of the blue just claims that its sorted & anyone disagreeing
+     * with it is killed
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void dictatorSort(T[] arr) {
+        if (isSorted(arr)) {
+            return;
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * perform the quicksort on a generic array
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
     public static <T extends Comparable<T>> void quickSort(T[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
 
 
+    /**
+     * perform the quicksort on a generic array
+     *
+     * @param arr   the array
+     * @param begin the begin index (init 0)
+     * @param end   the end index (init length - 1)
+     * @param <T>   the generic type
+     */
     private static <T extends Comparable<T>> void quickSort(T[] arr, int begin, int end) {
         if (begin < end) {
             int partitionIndex = partition(arr, begin, end);
@@ -100,12 +148,5 @@ public class Sort {
             quickSort(arr, begin, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, end);
         }
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{213, 213, 21, 2, 5235, 46, 54, 634, 6, 32, 623, 523, 325, 18};
-        System.out.printf("I've sorted %s with only ", Arrays.toString(arr));
-        bogoSort(arr, BigInteger.ZERO);
-        System.out.println(" iterations!");
     }
 }

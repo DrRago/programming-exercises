@@ -1,39 +1,51 @@
 package de.dhbwka.exercise.strings;
 
-import java.util.HashMap;
-
 /**
  * @author Leonhard Gahr
  */
 public class RomanNumber {
-    static HashMap<Character, Integer> ref = new HashMap<>();
-
-    static {
-        ref.put('I', 1);
-        ref.put('V', 5);
-        ref.put('X', 10);
-        ref.put('L', 50);
-        ref.put('C', 100);
-        ref.put('D', 500);
-        ref.put('M', 1000);
+    /**
+     * get the numeric value for a single roman number
+     *
+     * @param LETTER the roman LETTER
+     * @return the integer value
+     */
+    private static int decode(final int LETTER) {
+        switch (LETTER) {
+            case 'M':
+                return 1000;
+            case 'D':
+                return 500;
+            case 'C':
+                return 100;
+            case 'L':
+                return 50;
+            case 'X':
+                return 10;
+            case 'V':
+                return 5;
+            case 'I':
+                return 1;
+            default:
+                return 0;
+        }
     }
 
-    public static int convertRoman(String roman) {
-        int number = 0;
-        int prev = 0;
+    /**
+     * Convert roman number string to an integer
+     *
+     * @param ROMAN the roman number
+     * @return the calculated integer
+     */
+    private static int convertRoman(final String ROMAN) {
+        final int[] prev = {0};
 
-        for (int i = roman.length() - 1; i >= 0; i--) {
-            int temp = ref.get(roman.charAt(i));
-
-            if (temp < prev) {
-                number -= temp;
-            } else {
-                number += temp;
-            }
-            prev = temp;
-        }
-
-        return number;
+        // reverse string, iterate over the chars, map to the actual integer values and return the sum
+        return new StringBuilder(ROMAN).reverse().chars().map(RomanNumber::decode).map(n -> {
+            int tmp = n < prev[0] ? -n : n;
+            prev[0] = n;
+            return tmp;
+        }).sum();
     }
 
     public static void main(String[] args) {

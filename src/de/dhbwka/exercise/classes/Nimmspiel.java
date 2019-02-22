@@ -63,7 +63,7 @@ public class Nimmspiel {
      *
      * @return the name of the winning player
      */
-    public String play() throws OperationNotSupportedException {
+    private String play() throws OperationNotSupportedException {
         do {
             nextPlayer();
 

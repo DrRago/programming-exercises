@@ -18,16 +18,31 @@ public class Polynomial {
     private final double B;
     private final double C;
 
+    /**
+     * initialize zero polynomial
+     */
     public Polynomial() {
         this(0, 0, 0);
     }
 
+    /**
+     * Initialize polynomial with double values
+     *
+     * @param a the a
+     * @param b the b
+     * @param c the c
+     */
     public Polynomial(double a, double b, double c) {
         this.A = a;
         this.B = b;
         this.C = c;
     }
 
+    /**
+     * Parse a polynomial string
+     *
+     * @param polynomial the polynomial string
+     */
     public Polynomial(String polynomial) {
         List<Double> as = new ArrayList<>();
         List<Double> bs = new ArrayList<>();
@@ -78,7 +93,12 @@ public class Polynomial {
         return new Polynomial(A * d, B * d, C * d);
     }
 
-    public double[] roots () {
+    /**
+     * calculate roots of the polynomial
+     *
+     * @return the roots as array of length 2
+     */
+    public double[] roots() {
         double[] roots = new double[2];
         if (A == 0) {
             if (B == 0) {
@@ -89,8 +109,8 @@ public class Polynomial {
         } else {
             final double D = (B * B) - (4 * A * C);
             if (D >= 0) {
-                roots[0] = (-B + Math.sqrt(D))/(2*A);
-                roots[1] = (-B - Math.sqrt(D))/(2*A);
+                roots[0] = (-B + Math.sqrt(D)) / (2 * A);
+                roots[1] = (-B - Math.sqrt(D)) / (2 * A);
             } else {
                 return null;
             }
@@ -108,7 +128,7 @@ public class Polynomial {
     }
 
     public static void main(String[] args) {
-        Polynomial p1 = new Polynomial("2.0x^2 +0.0x +0.0");
+        Polynomial p1 = new Polynomial("2.0x^2 + 0.0x + 0.0");
         System.out.println("p1: " + p1);
 
         Polynomial p2 = new Polynomial("0.0x^2 -4.0x +1.0");

@@ -7,8 +7,8 @@ import de.dhbwka.exercise.utility.ScannerUtility;
  */
 public class Palindrome {
     public static void main(String[] args) {
-        String s = ScannerUtility.getString("Please enter string: ");
-        String s2 = new StringBuilder(s).reverse().toString();
-        System.out.printf("Reversed: %s%n%s is%s a palindrome", s2, s, s.toLowerCase().equals(s2.toLowerCase()) ? "" : "n't");
+        final String INPUT = ScannerUtility.getString("Please enter string: ");
+        final String REVERSED = new StringBuffer(INPUT).reverse().toString();
+        System.out.printf("Reversed: '%s'%n'%s' is%s a palindrome", REVERSED, INPUT, INPUT.equalsIgnoreCase(REVERSED) ? "" : "n't");
     }
 }
