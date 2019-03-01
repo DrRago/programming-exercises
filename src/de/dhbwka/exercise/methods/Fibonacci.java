@@ -7,16 +7,13 @@ import de.dhbwka.exercise.utility.ScannerUtility;
  */
 public class Fibonacci {
 
-    public static void getFibonacci(long n) {
-        System.out.println(getFibonacci(n, 1, 1));
-    }
-
-    private static String getFibonacci(long n, long prev1, long prev2) {
-        if (n <= 0) return String.valueOf(prev1 + prev2);
-        return prev1 + "\n" + getFibonacci(n - 1, prev2, prev1 + prev2);
+    private static long getFibonacci(long n) {
+        return n <= 1 ? n : getFibonacci(--n) + getFibonacci(--n);
     }
 
     public static void main(String[] args) {
-        getFibonacci(ScannerUtility.getInt("Please enter the depth: "));
+        while (true) {
+            System.out.println(getFibonacci(ScannerUtility.getInt("#fibonacci: ")));
+        }
     }
 }
