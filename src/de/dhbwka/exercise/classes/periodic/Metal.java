@@ -43,8 +43,19 @@ public class Metal extends Element {
         this(name, symbol, ordinal, shell, Phase.SOLID, false, false, conductivity);
     }
 
+    /**
+     * Initialize the metal with an element
+     *
+     * @param element      the element
+     * @param metalloid    whether the metal is a metallloid
+     * @param conductivity the conductivity
+     */
+    public Metal(Element element, boolean metalloid, double conductivity) {
+        this(element.getName(), element.getSymbol(), element.getOrdinal(), element.getShell(), element.getPhase(), element.isMainGroup(), metalloid, conductivity);
+    }
+
     @Override
     public String toString() {
-        return super.toString() + String.format(", %s\u03C3: %f", metalloid ? "metalloid, ": "", conductivity);
+        return super.toString() + String.format(", %s\u03C3: %f", metalloid ? "metalloid, " : "", conductivity);
     }
 }

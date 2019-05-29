@@ -1,6 +1,5 @@
 package de.dhbwka.exercise.classes.periodic;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,6 @@ import lombok.Setter;
 public class Element {
     private String name;
     private String symbol;
-    @SerializedName("number")
     private int ordinal;
     private char shell;
     private Phase phase; // at 25°C (298.15 K)
@@ -24,7 +22,7 @@ public class Element {
      * @param name      the elements name
      * @param symbol    the elements symbol
      * @param ordinal   the ordinal of the element
-     * @param shell     the shell of the element
+     * @param shell    the shell of the element
      * @param phase     the phase of the element
      * @param mainGroup whether the element is in the main group
      */
@@ -56,7 +54,7 @@ public class Element {
      */
     @Override
     public String toString() {
-        return String.format("%s (%s, %d) shell: %s, %s, group: %s", name, symbol, ordinal, shell, phase.toString().toLowerCase(), mainGroup ? "Hauptgruppe" : "Nebengruppe");
+        return String.format("%s (%s, %d) shell: %, %s, group: %s", name, symbol, ordinal, shell, phase.toString().toLowerCase(), mainGroup ? "Hauptgruppe" : "Nebengruppe");
     }
 
     /**
