@@ -82,6 +82,7 @@ class SortUtility {
 
     static <T extends Comparable<T>> int partition(T[] arr, int begin, int end) {
         T pivot = arr[end];
+        System.out.println(pivot);
         int i = (begin - 1);
 
         for (int j = begin; j < end; j++) {

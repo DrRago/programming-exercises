@@ -91,7 +91,7 @@ public class Sort {
      * The solar bitflip sort for generic arrays
      * <p>
      * check if the array is sorted, if not, wait a random amount of time, pray for having bit flips caused
-     * by solar radiation, just in the correct order and repeat the check <b>Doesn’t work if you have EEC memory.</b>
+     * by solar radiation, put the bits just in the correct order and repeat the check <b>Doesn’t work if you have EEC memory.</b>
      *
      * @param arr the array
      * @param <T> the generic type
