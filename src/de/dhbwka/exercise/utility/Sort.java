@@ -2,6 +2,7 @@ package de.dhbwka.exercise.utility;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static de.dhbwka.exercise.utility.SortUtility.*;
@@ -84,7 +85,6 @@ public class Sort {
                 break;
             }
         }
-
     }
 
     /**
@@ -123,6 +123,17 @@ public class Sort {
     }
 
     /**
+     * the lucky sort algorithm
+     * <p>
+     * It is so lucky that the input is already sorted, and it need do nothing!
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void luckySort(T[] arr) {
+    }
+
+    /**
      * perform the quicksort on a generic array
      *
      * @param arr the array
@@ -147,6 +158,69 @@ public class Sort {
 
             quickSort(arr, begin, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+
+    /**
+     * sleep sort for integer nums
+     *
+     * @param arr the array
+     */
+    public static void sleepSortPrint(int[] arr) {
+        final CountDownLatch doneSignal = new CountDownLatch(arr.length);
+        for (final int num : arr) {
+            new Thread(() -> {
+                doneSignal.countDown();
+                try {
+                    doneSignal.await();
+                    Thread.sleep(num);
+                    System.out.println(num);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+
+    /**
+     * stoogeSort implementation for generic types
+     * <p>
+     * swaps the top and bottom items if needed, then (recursively) sorts the bottom two-thirds, then the top two-thirds, then the bottom two-thirds again
+     *
+     * @param arr the array
+     * @param <T> the generic type
+     */
+    public static <T extends Comparable<T>> void stoogeSort(T[] arr) {
+        stoogeSort(arr, 0, arr.length - 1);
+    }
+
+
+    /**
+     * stoogeSort implementation for generic types
+     * <p>
+     * swaps the top and bottom items if needed, then (recursively) sorts the bottom two-thirds, then the top two-thirds, then the bottom two-thirds again
+     *
+     * @param arr   the array
+     * @param begin the begin index
+     * @param end   the end index
+     * @param <T>   the generic type
+     */
+    public static <T extends Comparable<T>> void stoogeSort(T[] arr, int begin, int end) {
+        System.out.printf("%d - %d%n", begin, end);
+        if (begin >= end) {
+            return;
+        }
+        if (arr[begin].compareTo(arr[end]) > 0) {
+            swap(arr, begin, end);
+        }
+
+        if (end - begin + 1 > 2) {
+            double tmp = (end - begin + 1) / 3;
+
+            stoogeSort(arr, begin, (int) (end - tmp));
+            stoogeSort(arr, (int) (begin + tmp), (end));
+            stoogeSort(arr, begin, (int) (end - tmp));
         }
     }
 }
